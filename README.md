@@ -10,6 +10,8 @@
 
 ## design docs
 
-* [policy](design_policy.md)
+* policy
+    * [basic archtecture](design_archtecture.md)
+    * [directory structure](design_directory_structure.md)
 * UI
     * [overview](ui_overview.md)
