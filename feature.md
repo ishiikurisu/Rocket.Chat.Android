@@ -29,7 +29,6 @@
 
 ## will be supported in future release
 
-* connect to multiple server
 * emoji
 
 ## will be supported (if strongly requested...)
@@ -37,6 +36,7 @@
 * authentication
     * facebook
     * ...
+* connect to multiple server (very difficurt...)
 
 ## won't be supported
 
