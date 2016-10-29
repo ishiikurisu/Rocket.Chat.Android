@@ -13,5 +13,6 @@
 * policy
     * [basic archtecture](design_archtecture.md)
     * [directory structure](design_directory_structure.md)
-* UI
+* UI (and the states of models)
     * [overview](ui_overview.md)
+    * [login](ui_login.md)
