@@ -33,4 +33,9 @@ Util function classes for view rendering.
 
 * app/src/main/java/chat/rocket/android/service
 * app/src/main/java/chat/rocket/android/service/observer
+* app/src/main/java/chat/rocket/android/service/ddp_subscription
 
+NOTE that 
+
+* observer concerns Realm model, such as "new Message is inserted"
+* ddp_subscription is just subscriber, such as "user_settings", "stream_messages"
