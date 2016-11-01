@@ -15,4 +15,5 @@
     * [directory structure](design_directory_structure.md)
 * UI (and the states of models)
     * [overview](ui_overview.md)
+    * [model-based archtecture](model_based_archtecture.md)
     * [login](ui_login.md)
