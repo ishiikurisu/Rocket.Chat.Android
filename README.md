@@ -13,6 +13,7 @@
 * policy
     * [basic archtecture](design_archtecture.md)
     * [directory structure](design_directory_structure.md)
+    * [git branches](git_branch_policy.md)
 * UI (and the states of models)
     * [overview](ui_overview.md)
     * [model-based archtecture](model_based_archtecture.md)
