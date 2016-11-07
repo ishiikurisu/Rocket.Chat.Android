@@ -16,4 +16,4 @@
 * UI (and the states of models)
     * [overview](ui_overview.md)
     * [model-based archtecture](model_based_archtecture.md)
-    * [login](ui_login.md)
+    * [login](ui_login.md) / concerning [models](model_login)
