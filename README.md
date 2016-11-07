@@ -8,6 +8,8 @@
 
 * 1.0-beta will be released around Dec.15, 2016
 
+[TODO management (in Trello)](https://trello.com/b/t2rHUDpE/rocket-chat-android)
+
 ## design docs
 
 * policy
