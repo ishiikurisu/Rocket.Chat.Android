@@ -8,6 +8,7 @@
 
 don't include any helpers (such as ListAdapter, HogeHogeUtil, ...)
 
+Widget components are not put in app/src/main/java/chat/rocket/android/view, but in [rocket-chat-android-widgets](rocket-chat-android-widgets/README.md) project!
 
 ## layout helpers
 
