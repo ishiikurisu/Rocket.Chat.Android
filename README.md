@@ -8,7 +8,8 @@
 
 * 1.0-beta will be released around Dec.15, 2016
 
-[TODO management (in Trello)](https://trello.com/b/t2rHUDpE/rocket-chat-android)
+[issues](https://github.com/RocketChat/Rocket.Chat.Android/issues) with `[v1.0-beta]` will be implemented.
+Contribution to the issue without assignee is very welcome!
 
 ## design docs
 
