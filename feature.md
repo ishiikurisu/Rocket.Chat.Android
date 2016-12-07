@@ -6,6 +6,8 @@
     * email
     * twitter
     * github
+    * google
+    * facebook
 
 * load rooms
     * public rooms
@@ -34,7 +36,7 @@
 ## will be supported (if strongly requested...)
 
 * authentication
-    * facebook
+    * LinkedIn
     * ...
 * connect to multiple server (very difficurt...)
 
