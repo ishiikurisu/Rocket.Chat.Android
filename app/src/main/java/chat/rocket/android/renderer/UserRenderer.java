@@ -3,6 +3,7 @@ package chat.rocket.android.renderer;
 import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import chat.rocket.android.helper.Avatar;
 import chat.rocket.android.helper.TextUtils;
 import chat.rocket.android.widget.AbsoluteUrl;
@@ -32,7 +33,7 @@ public class UserRenderer extends AbstractRenderer<User> {
     // whenever necessary with the necessary parameters to start another conversation.
     if (!TextUtils.isEmpty(object.getUsername())) {
       rocketChatAvatar.setOnClickListener((view) -> {
-        Toast.makeText(getContext(), "USERNAME: " + user.getUsername(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "USERNAME: " + object.getUsername(), Toast.LENGTH_SHORT).show();
       });
       new Avatar(absoluteUrl, object.getUsername()).into(rocketChatAvatar);
     }

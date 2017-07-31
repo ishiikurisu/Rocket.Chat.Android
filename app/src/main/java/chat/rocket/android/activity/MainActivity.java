@@ -7,6 +7,7 @@ import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import chat.rocket.android.LaunchUtil;
 import chat.rocket.android.R;
@@ -136,7 +137,7 @@ public class MainActivity extends AbstractAuthedActivity implements MainContract
     SessionInteractor sessionInteractor = new SessionInteractor(
       new RealmSessionRepository(hostname)
     );
-    
+
     presenter = new MainPresenter(
       roomInteractor,
       createRoomInteractor,
@@ -171,6 +172,8 @@ public class MainActivity extends AbstractAuthedActivity implements MainContract
 
   @Override
   public void showRoom(String hostname, String roomId) {
+    // TODO Discover where this roomId comes from and how it is generated
+    Toast.makeText(getApplicationContext(), "HEY! " + hostname + "/" + roomId ,Toast.LENGTH_SHORT).show();
     showFragment(RoomFragment.create(hostname, roomId));
     closeSidebarIfNeeded();
     KeyboardHelper.hideSoftKeyboard(this);
