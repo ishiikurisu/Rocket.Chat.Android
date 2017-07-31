@@ -59,7 +59,6 @@ public abstract class AbstractAddRoomDialogFragment extends RxAppCompatDialogFra
   protected abstract Task<Void> getMethodCallForSubmitAction();
 
   protected final void createRoom() {
-    System.out.println("HEY! " + hostname);
     showOrHideWaitingView(true);
 
     getMethodCallForSubmitAction().continueWith(task -> {

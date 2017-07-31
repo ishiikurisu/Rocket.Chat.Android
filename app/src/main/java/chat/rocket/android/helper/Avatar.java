@@ -6,10 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import chat.rocket.android.api.MethodCallHelper;
-import chat.rocket.android.fragment.chatroom.RoomFragment;
-import chat.rocket.core.models.Room;
 import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.io.UnsupportedEncodingException;

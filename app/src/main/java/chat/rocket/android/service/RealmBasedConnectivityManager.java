@@ -238,9 +238,7 @@ import rx.subjects.PublishSubject;
       serverConnectivityList.put(hostname, ServerConnectivity.STATE_DISCONNECTING);
 
       if (serviceInterface != null) {
-        return serviceInterface.disconnectFromServer(hostname)
-                // //after disconnection from server, remove HOSTNAME key from HashMap
-                .doAfterTerminate(() -> serverConnectivityList.remove(hostname));
+        return serviceInterface.disconnectFromServer(hostname);
       } else {
         return Single.error(new IllegalStateException("not prepared"));
       }

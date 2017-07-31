@@ -89,7 +89,7 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
     super.onCreate(savedInstanceState);
 
     Bundle args = getArguments();
-    hostname = args != null ? null : args.getString(HOSTNAME);
+    hostname = (args == null) ? null : args.getString(HOSTNAME);
 
     methodCallHelper = new MethodCallHelper(getContext(), hostname);
     realmSpotlightRoomRepository = new RealmSpotlightRoomRepository(hostname);
@@ -227,11 +227,12 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
     });
   }
 
+  // @ishiikurisu: IDEA This is where I should make changes, right? 
   private void onRenderCurrentUser(User user, RocketChatAbsoluteUrl absoluteUrl) {
     if (user != null && absoluteUrl != null) {
       new UserRenderer(getContext(), user)
           .avatarInto((RocketChatAvatar) rootView.findViewById(R.id.current_user_avatar),
-              absoluteUrl)
+                      absoluteUrl)
           .usernameInto((TextView) rootView.findViewById(R.id.current_user_name))
           .statusColorInto((ImageView) rootView.findViewById(R.id.current_user_status));
     }
@@ -240,11 +241,12 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
   private void updateRoomListMode(User user) {
     final List<RoomListHeader> roomListHeaders = new ArrayList<>();
 
-    if (user != null && user.getSettings() != null && user.getSettings().getPreferences() != null
-        && user.getSettings().getPreferences().isUnreadRoomsMode()) {
-      roomListHeaders.add(new UnreadRoomListHeader(
-          getString(R.string.fragment_sidebar_main_unread_rooms_title)
-      ));
+    if (user != null
+     && user.getSettings() != null
+     && user.getSettings().getPreferences() != null
+     && user.getSettings().getPreferences().isUnreadRoomsMode()) {
+      roomListHeaders.add(
+        new UnreadRoomListHeader(getString(R.string.fragment_sidebar_main_unread_rooms_title)));
     }
 
     roomListHeaders.add(new FavoriteRoomListHeader(
@@ -267,9 +269,6 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
     rootView.findViewById(R.id.btn_logout).setOnClickListener(view -> {
       presenter.onLogout();
       closeUserActionContainer();
-
-      // destroy Activity on logout to be able to recreate most of the environment
-      this.getActivity().finish();
     });
   }
 

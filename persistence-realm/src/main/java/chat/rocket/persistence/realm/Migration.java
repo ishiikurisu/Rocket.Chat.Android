@@ -70,16 +70,4 @@ public class Migration implements RealmMigration {
       messageSchema.addField(RealmMessage.EDITED_AT, long.class);
     }
   }
-
-  // hack around to avoid "new different configuration cannot access the same file" error
-  @Override
-  public int hashCode() {
-    return 37;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    return (o instanceof Migration);
-  }
-  // end hack
 }

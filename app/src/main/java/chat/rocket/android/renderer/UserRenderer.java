@@ -1,7 +1,7 @@
 package chat.rocket.android.renderer;
 
 import android.content.Context;
-import android.view.View;
+import android.widget.Toast;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,9 +28,14 @@ public class UserRenderer extends AbstractRenderer<User> {
       return this;
     }
 
+    // @ishiikurisu: this `object` is the user. the absolute url is the chat url.
+    // i think i need to create an url for the chat (if it doesn't exist) and show it with the relevant
+    // users.
     if (!TextUtils.isEmpty(object.getUsername())) {
-      Avatar avatar = new Avatar(absoluteUrl, object.getUsername());
-      avatar.into(rocketChatAvatar);
+      rocketChatAvatar.setOnClickListener((view) -> {
+        Toast.makeText(context, "URL: " + absoluteUrl.toString(), Toast.LENGTH_SHORT).show();
+      });
+      new Avatar(absoluteUrl, object.getUsername()).into(rocketChatAvatar);
     }
     return this;
   }

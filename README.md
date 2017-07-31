@@ -21,3 +21,7 @@ echo "sdk.dir="$ANDROID_HOME > local.properties
 ## Bug report & Feature request
 
 Please report via [GitHub issue](https://github.com/RocketChat/Rocket.Chat.Android/issues) :)
+
+## Contributing ##
+
+The goal of this fork is to add the feature of starting a DM directly by clicking on a user's avatar.

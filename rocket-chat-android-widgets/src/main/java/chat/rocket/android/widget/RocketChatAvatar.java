@@ -66,6 +66,7 @@ public class RocketChatAvatar extends FrameLayout {
   }
 
   // By @ishiikurisu
+  @Override
   public void setOnClickListener(OnClickListener listener) {
     draweeView.setOnClickListener(listener);
   }
