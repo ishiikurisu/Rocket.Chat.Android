@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
 import com.fernandocejas.arrow.optional.Optional;
 import com.jakewharton.rxbinding2.support.v4.widget.RxDrawerLayout;
 
@@ -414,13 +415,12 @@ public class RoomFragment extends AbstractChatRoomFragment
   }
 
   private void uploadFile(Uri uri) {
-    String uplId = new FileUploadHelper(getContext(), RealmStore.get(hostname))
-        .requestUploading(roomId, uri);
+    String uplId = new FileUploadHelper(getContext(), RealmStore.get(hostname)).requestUploading(roomId, uri);
     if (!TextUtils.isEmpty(uplId)) {
       FileUploadProgressDialogFragment.create(hostname, roomId, uplId)
-          .show(getFragmentManager(), "FileUploadProgressDialogFragment");
+                                      .show(getFragmentManager(), "FileUploadProgressDialogFragment");
     } else {
-      // show error.
+      // Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -452,8 +452,7 @@ public class RoomFragment extends AbstractChatRoomFragment
   public void onItemSelected(int itemId) {
     for (AbstractExtraActionItem extraActionItem : extraActionItems) {
       if (extraActionItem.getItemId() == itemId) {
-        RoomFragmentPermissionsDispatcher
-            .onExtraActionSelectedWithCheck(RoomFragment.this, extraActionItem);
+        RoomFragmentPermissionsDispatcher.onExtraActionSelectedWithCheck(RoomFragment.this, extraActionItem);
         return;
       }
     }

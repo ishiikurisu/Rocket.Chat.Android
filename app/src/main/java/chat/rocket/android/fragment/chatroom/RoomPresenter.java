@@ -25,8 +25,7 @@ import chat.rocket.core.repositories.RoomRepository;
 import chat.rocket.core.repositories.UserRepository;
 import chat.rocket.android.service.ConnectivityManagerApi;
 
-public class RoomPresenter extends BasePresenter<RoomContract.View>
-    implements RoomContract.Presenter {
+public class RoomPresenter extends BasePresenter<RoomContract.View> implements RoomContract.Presenter {
 
   private final String roomId;
   private final MessageInteractor messageInteractor;

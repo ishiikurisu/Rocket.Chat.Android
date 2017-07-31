@@ -8,6 +8,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import chat.rocket.android.api.MethodCallHelper;
+import chat.rocket.android.fragment.chatroom.RoomFragment;
+import chat.rocket.core.models.Room;
 import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.io.UnsupportedEncodingException;
@@ -90,17 +92,7 @@ public class Avatar {
    */
   public void into(final RocketChatAvatar rocketChatAvatar) {
     final Context context = rocketChatAvatar.getContext();
-    String hostname = "cristiano.junior"; // TODO Discover how to get this hostname
-    MethodCallHelper methodCall = new MethodCallHelper(context, hostname);
     rocketChatAvatar.loadImage(getImageUrl(), getTextDrawable(context));
-    rocketChatAvatar.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        // TODO Start a chat activity
-        System.out.println("Loaded from " + getImageUrl());
-        methodCall.createDirectMessage(username);
-      }
-    });
   }
 
   public Drawable getTextDrawable(Context context) {

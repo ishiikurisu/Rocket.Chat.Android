@@ -40,14 +40,28 @@ public class MessageRenderer extends AbstractRenderer<Message> {
    */
   public MessageRenderer avatarInto(RocketChatAvatar rocketChatAvatar, AbsoluteUrl absoluteUrl) {
     if (object.getSyncState() == SyncState.FAILED) {
-      rocketChatAvatar.loadImage(VectorDrawableCompat
-          .create(context.getResources(), R.drawable.ic_error_outline_black_24dp, null));
+      rocketChatAvatar.loadImage(VectorDrawableCompat.create(context.getResources(),
+                                                             R.drawable.ic_error_outline_black_24dp,
+                                                             null));
     } else if (TextUtils.isEmpty(object.getAvatar())) {
       userRenderer.avatarInto(rocketChatAvatar, absoluteUrl);
     } else {
       final User user = object.getUser();
-      setAvatarInto(object.getAvatar(), absoluteUrl, user == null ? null : user.getUsername(),
-          rocketChatAvatar);
+      setAvatarInto(object.getAvatar(),
+                    absoluteUrl,
+                    user == null ? null : user.getUsername(),
+                    rocketChatAvatar);
+      rocketChatAvatar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          // TODO Start a new DM chat room
+          System.out.println("---");
+          System.out.println("HEY! This is " + user.getUsername());
+          System.out.println("...");
+          // RoomFragment fragment = new Fragment(hostname, id);
+          // fragment.render();
+        }
+      });
     }
     return this;
   }
@@ -141,8 +155,7 @@ public class MessageRenderer extends AbstractRenderer<Message> {
     return this;
   }
 
-  private void setAvatarInto(String avatar, AbsoluteUrl absoluteUrl, String username,
-                             RocketChatAvatar imageView) {
+  private void setAvatarInto(String avatar, AbsoluteUrl absoluteUrl, String username, RocketChatAvatar imageView) {
     imageView.loadImage(avatar, new Avatar(absoluteUrl, username).getTextDrawable(context));
   }
 

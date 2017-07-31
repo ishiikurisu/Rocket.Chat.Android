@@ -1,6 +1,7 @@
 package chat.rocket.android.renderer;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +29,8 @@ public class UserRenderer extends AbstractRenderer<User> {
     }
 
     if (!TextUtils.isEmpty(object.getUsername())) {
-      new Avatar(absoluteUrl, object.getUsername()).into(rocketChatAvatar);
+      Avatar avatar = new Avatar(absoluteUrl, object.getUsername());
+      avatar.into(rocketChatAvatar);
     }
     return this;
   }

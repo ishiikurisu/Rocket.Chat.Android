@@ -89,7 +89,7 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
     super.onCreate(savedInstanceState);
 
     Bundle args = getArguments();
-    hostname = args == null ? null : args.getString(HOSTNAME);
+    hostname = args != null ? null : args.getString(HOSTNAME);
 
     methodCallHelper = new MethodCallHelper(getContext(), hostname);
     realmSpotlightRoomRepository = new RealmSpotlightRoomRepository(hostname);
