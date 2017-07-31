@@ -30,9 +30,7 @@ import hugo.weaving.DebugLog;
  * Entry-point for Rocket.Chat.Android application.
  */
 public class MainActivity extends AbstractAuthedActivity implements MainContract.View {
-
   private StatusTicker statusTicker;
-
   private MainContract.Presenter presenter;
 
   @Override
@@ -131,34 +129,28 @@ public class MainActivity extends AbstractAuthedActivity implements MainContract
     }
 
     RoomInteractor roomInteractor = new RoomInteractor(new RealmRoomRepository(hostname));
-
     CanCreateRoomInteractor createRoomInteractor = new CanCreateRoomInteractor(
-        new RealmUserRepository(hostname),
-        new SessionInteractor(new RealmSessionRepository(hostname))
+      new RealmUserRepository(hostname),
+      new SessionInteractor(new RealmSessionRepository(hostname))
     );
-
     SessionInteractor sessionInteractor = new SessionInteractor(
-        new RealmSessionRepository(hostname)
+      new RealmSessionRepository(hostname)
     );
-
+    
     presenter = new MainPresenter(
-        roomInteractor,
-        createRoomInteractor,
-        sessionInteractor,
-        new MethodCallHelper(this, hostname),
-        ConnectivityManager.getInstance(getApplicationContext()),
-        new RocketChatCache(this)
+      roomInteractor,
+      createRoomInteractor,
+      sessionInteractor,
+      new MethodCallHelper(this, hostname),
+      ConnectivityManager.getInstance(getApplicationContext()),
+      new RocketChatCache(this)
     );
-
-    updateSidebarMainFragment();
+    getSupportFragmentManager().beginTransaction()
+                               .replace(R.id.sidebar_fragment_container,
+                                        SidebarMainFragment.create(hostname))
+                               .commit();
 
     presenter.bindView(this);
-  }
-
-  private void updateSidebarMainFragment() {
-    getSupportFragmentManager().beginTransaction()
-        .replace(R.id.sidebar_fragment_container, SidebarMainFragment.create(hostname))
-        .commit();
   }
 
   @Override
@@ -229,7 +221,6 @@ public class MainActivity extends AbstractAuthedActivity implements MainContract
     public static final int STATUS_DISMISS = 0;
     public static final int STATUS_CONNECTION_ERROR = 1;
     public static final int STATUS_TOKEN_LOGIN = 2;
-
     private int status;
     private Snackbar snackbar;
 

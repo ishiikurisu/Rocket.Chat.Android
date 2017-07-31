@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
@@ -151,16 +152,15 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
         searchView.setQuery(null, false);
         searchView.clearFocus();
         methodCallHelper.joinRoom(spotlightRoom.getId())
-            .onSuccessTask(task -> {
-              presenter.onSpotlightRoomSelected(spotlightRoom);
-              return null;
-            });
+                        .onSuccessTask((task) -> {
+                            presenter.onSpotlightRoomSelected(spotlightRoom);
+                            return null;
+                        });
       }
     });
 
     RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.room_list_container);
-    recyclerView.setLayoutManager(
-        new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     recyclerView.setAdapter(adapter);
 
     searchView = (SearchView) rootView.findViewById(R.id.search);
@@ -227,12 +227,12 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
     });
   }
 
-  // @ishiikurisu: IDEA This is where I should make changes, right? 
+  // @ishiikurisu: adding the listener here makes no difference in the program.s
   private void onRenderCurrentUser(User user, RocketChatAbsoluteUrl absoluteUrl) {
     if (user != null && absoluteUrl != null) {
+      RocketChatAvatar rocketChatAvatar = (RocketChatAvatar) rootView.findViewById(R.id.current_user_avatar);
       new UserRenderer(getContext(), user)
-          .avatarInto((RocketChatAvatar) rootView.findViewById(R.id.current_user_avatar),
-                      absoluteUrl)
+          .avatarInto(rocketChatAvatar, absoluteUrl)
           .usernameInto((TextView) rootView.findViewById(R.id.current_user_name))
           .statusColorInto((ImageView) rootView.findViewById(R.id.current_user_status));
     }
@@ -245,14 +245,12 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
      && user.getSettings() != null
      && user.getSettings().getPreferences() != null
      && user.getSettings().getPreferences().isUnreadRoomsMode()) {
-      roomListHeaders.add(
-        new UnreadRoomListHeader(getString(R.string.fragment_sidebar_main_unread_rooms_title)));
+      roomListHeaders.add(new UnreadRoomListHeader(getString(R.string.fragment_sidebar_main_unread_rooms_title)));
     }
 
     roomListHeaders.add(new FavoriteRoomListHeader(
         getString(R.string.fragment_sidebar_main_favorite_title)
     ));
-
     roomListHeaders.add(new ChannelRoomListHeader(
         getString(R.string.fragment_sidebar_main_channels_title),
         () -> showAddRoomDialog(AddChannelDialogFragment.create(hostname))
