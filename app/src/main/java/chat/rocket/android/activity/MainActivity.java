@@ -172,7 +172,7 @@ public class MainActivity extends AbstractAuthedActivity implements MainContract
 
   @Override
   public void showRoom(String hostname, String roomId) {
-    // TODO Discover where this roomId comes from and how it is generated
+    // @ishiikurisu: TODO Discover where this roomId comes from and how it is generated
     Toast.makeText(getApplicationContext(), "HEY! " + hostname + "/" + roomId ,Toast.LENGTH_SHORT).show();
     showFragment(RoomFragment.create(hostname, roomId));
     closeSidebarIfNeeded();
@@ -201,10 +201,10 @@ public class MainActivity extends AbstractAuthedActivity implements MainContract
   @Override
   public void showConnectionError() {
     statusTicker.updateStatus(StatusTicker.STATUS_CONNECTION_ERROR,
-        Snackbar.make(findViewById(getLayoutContainerForFragment()),
-            R.string.fragment_retry_login_error_title, Snackbar.LENGTH_INDEFINITE)
-            .setAction(R.string.fragment_retry_login_retry_title, view ->
-                presenter.onRetryLogin()));
+                              Snackbar.make(findViewById(getLayoutContainerForFragment()),
+                                            R.string.fragment_retry_login_error_title, Snackbar.LENGTH_INDEFINITE)
+                                      .setAction(R.string.fragment_retry_login_retry_title,
+                                                 view -> presenter.onRetryLogin()));
   }
 
   @Override

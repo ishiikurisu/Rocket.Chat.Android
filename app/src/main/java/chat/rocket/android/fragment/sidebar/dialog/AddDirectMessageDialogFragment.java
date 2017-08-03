@@ -51,9 +51,7 @@ public class AddDirectMessageDialogFragment extends AbstractAddRoomDialogFragmen
   @Override
   protected void onSetupDialog() {
     View buttonAddDirectMessage = getDialog().findViewById(R.id.btn_add_direct_message);
-    AutoCompleteTextView autoCompleteTextView =
-        (AutoCompleteTextView) getDialog().findViewById(R.id.editor_username);
-
+    AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) getDialog().findViewById(R.id.editor_username);
     AbsoluteUrlHelper absoluteUrlHelper = new AbsoluteUrlHelper(
         hostname,
         new RealmServerInfoRepository(),
@@ -61,23 +59,16 @@ public class AddDirectMessageDialogFragment extends AbstractAddRoomDialogFragmen
         new SessionInteractor(new RealmSessionRepository(hostname))
     );
 
-    compositeDisposable.add(
-        absoluteUrlHelper.getRocketChatAbsoluteUrl()
-            .subscribeOn(AndroidSchedulers.from(BackgroundLooper.get()))
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                this::setupView,
-                Logger::report
-            )
-    );
-
+    compositeDisposable.add(absoluteUrlHelper.getRocketChatAbsoluteUrl()
+                                             .subscribeOn(AndroidSchedulers.from(BackgroundLooper.get()))
+                                             .observeOn(AndroidSchedulers.mainThread())
+                                             .subscribe(this::setupView,
+                                                        Logger::report));
     RxTextView.textChanges(autoCompleteTextView)
-        .map(text -> !TextUtils.isEmpty(text))
-        .compose(bindToLifecycle())
-        .subscribe(
-            buttonAddDirectMessage::setEnabled,
-            Logger::report
-        );
+              .map(text -> !TextUtils.isEmpty(text))
+              .compose(bindToLifecycle())
+              .subscribe(buttonAddDirectMessage::setEnabled,
+                         Logger::report);
 
     buttonAddDirectMessage.setOnClickListener(view -> createRoom());
   }
@@ -89,22 +80,21 @@ public class AddDirectMessageDialogFragment extends AbstractAddRoomDialogFragmen
       return;
     }
 
-    AutoCompleteTextView autoCompleteTextView =
-        (AutoCompleteTextView) getDialog().findViewById(R.id.editor_username);
-
+    AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) getDialog().findViewById(R.id.editor_username);
     RealmAutoCompleteAdapter<RealmUser> adapter =
         realmHelper.createAutoCompleteAdapter(getContext(),
-            (realm, text) -> realm.where(RealmUser.class)
-                .contains(RealmUser.USERNAME, text, Case.INSENSITIVE)
-                .findAllSorted(RealmUser.USERNAME),
-            context -> new SuggestUserAdapter(context, rocketChatAbsoluteUrlOptional.get()));
+                                              (realm, text) -> realm.where(RealmUser.class)
+                                                                    .contains(RealmUser.USERNAME, text, Case.INSENSITIVE)
+                                                                    .findAllSorted(RealmUser.USERNAME),
+                                              context -> new SuggestUserAdapter(context,
+                                                                                rocketChatAbsoluteUrlOptional.get()));
     autoCompleteTextView.setAdapter(adapter);
   }
 
   @Override
   protected Task<Void> getMethodCallForSubmitAction() {
-    String username =
-        ((TextView) getDialog().findViewById(R.id.editor_username)).getText().toString();
+    String username = ((TextView) getDialog().findViewById(R.id.editor_username)).getText().toString();
+    // @ishiikurisu: this methodCall is from the abstract class and helps creating a direct message. sort of.
     return methodCall.createDirectMessage(username);
   }
 }
