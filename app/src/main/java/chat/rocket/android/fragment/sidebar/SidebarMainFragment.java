@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
@@ -95,6 +96,8 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
     realmSpotlightRoomRepository = new RealmSpotlightRoomRepository(hostname);
 
     RealmUserRepository userRepository = new RealmUserRepository(hostname);
+    // @ishiikurisu: TODO Get these users out of the repository.
+    // Toast.makeText(getContext(), repo, Toast.LENGTH_SHORT).show();
 
     AbsoluteUrlHelper absoluteUrlHelper = new AbsoluteUrlHelper(
         hostname,
@@ -103,9 +106,19 @@ public class SidebarMainFragment extends AbstractFragment implements SidebarMain
         new SessionInteractor(new RealmSessionRepository(hostname))
     );
 
+    // @ishiikurisu: TODO Make this work
+    RoomInteractor ri = new RoomInteractor(new RealmRoomRepository(hostname));
+    List<Room> rooms = ri.getOpenRooms();
+    String outlet = "";
+    for (Room room: rooms) {
+        outlet += room.getName();
+        outlet += "\n";
+    }
+    Toast.makeText(getContext(), outlet, Toast.LENGTH_LONG).show();
+
     presenter = new SidebarMainPresenter(
         hostname,
-        new RoomInteractor(new RealmRoomRepository(hostname)),
+        ri,
         userRepository,
         new RocketChatCache(getContext()),
         absoluteUrlHelper,
